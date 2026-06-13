@@ -1,88 +1,90 @@
 # Plugin `notebooklm`
 
-Skille [Claude Code](https://claude.com/claude-code) do obsługi **Google NotebookLM**
-z poziomu Claude Code: zarządzanie notebookami, dodawanie źródeł, zadawanie pytań
-(Q&A z cytatami zapisywane do notatki Markdown) oraz pobieranie transkryptów źródeł.
+[PL](README_PL.md)
 
-Pod spodem każdy skill woła CLI [`notebooklm-py`](https://github.com/teng-lin/notebooklm-py)
-(`python -m notebooklm`).
+[Claude Code](https://claude.com/claude-code) skills for working with **Google NotebookLM**
+from inside Claude Code: managing notebooks, adding sources, asking questions
+(Q&A with citations saved to a Markdown note), and fetching source transcripts.
 
-## Skille
+Under the hood every skill calls the [`notebooklm-py`](https://github.com/teng-lin/notebooklm-py)
+CLI (`python -m notebooklm`).
 
-| Skill | Zastosowanie |
-|-------|--------------|
-| **notebooklm-setup** | Instalacja, logowanie kontem Google, weryfikacja sesji (`login`, `doctor`, `profile`). Wspólna zależność rodziny. |
-| **notebooklm-notebooks** | Zarządzanie notebookami: `list`, `create`, `rename`, `delete`, `use`, `summary`. |
-| **notebooklm-sources** | Dodawanie i porządkowanie źródeł (URL, YouTube, PDF/MD, tekst, agent research). |
-| **notebooklm-ask** | Pytanie do notebooka → notatka `.md` z cytatami (skrypt `ask_to_note.py`). |
-| **notebooklm-transcripts** | Pełny tekst źródeł (`source fulltext`) → osobne notatki (skrypt `fetch_transcripts.py`). |
+## Skills
 
-## Instalacja (dwuczęściowa)
+| Skill | Purpose |
+|-------|---------|
+| **notebooklm-setup** | Install, Google account login, session verification (`login`, `doctor`, `profile`). Shared dependency of the family. |
+| **notebooklm-notebooks** | Manage notebooks: `list`, `create`, `rename`, `delete`, `use`, `summary`. |
+| **notebooklm-sources** | Add and organize sources (URL, YouTube, PDF/MD, text, research agent). |
+| **notebooklm-ask** | Ask a notebook → `.md` note with citations (script `ask_to_note.py`). |
+| **notebooklm-transcripts** | Full source text (`source fulltext`) → separate notes (script `fetch_transcripts.py`). |
 
-Plugin dostarcza skille, ale pracują one na własnym backendzie CLI. Zainstaluj **oba**:
+## Installation (two parts)
+
+The plugin provides the skills, but they run on their own CLI backend. Install **both**:
 
 ```text
-# 1) Skille — marketplace Claude Code
+# 1) Skills — Claude Code marketplace
 /plugin marketplace add lutencjusz/notebooklm-plugin
 /plugin install notebooklm@notebooklm-plugin
 
-# 2) Backend CLI (wymagany)
+# 2) Backend CLI (required)
 uv tool install "notebooklm-py[browser]"
 ```
 
-Alternatywa dla CLI: `pipx install "notebooklm-py[browser]"`.
-Pierwsze użycie pobiera Chromium (~170 MB). Pominięcie kroku 2 to najczęstszy powód
-„zainstalowałem, a nie działa".
+CLI alternative: `pipx install "notebooklm-py[browser]"`.
+First use downloads Chromium (~170 MB). Skipping step 2 is the most common reason for
+"I installed it but it doesn't work".
 
-Weryfikacja:
+Verify:
 
 ```powershell
 python -m notebooklm --version
 ```
 
-## Konfiguracja
+## Configuration
 
-Logowanie jest **interaktywne** (otwiera przeglądarkę) — nie da się go wykonać za
-użytkownika. Przeprowadza je skill **notebooklm-setup**:
+Login is **interactive** (it opens a browser) — it cannot be done on the user's behalf.
+The **notebooklm-setup** skill walks you through it:
 
 ```powershell
-notebooklm login          # logowanie kontem Google (interaktywne)
-python -m notebooklm doctor   # sprawdzenie stanu sesji/profilu
+notebooklm login              # Google account login (interactive)
+python -m notebooklm doctor   # check session/profile state
 ```
 
-Sesja Google jest zapisywana **lokalnie przez `notebooklm-py`** (poza tym repo) — w repo
-nie ma żadnych poświadczeń ani pliku `.env`.
+The Google session is stored **locally by `notebooklm-py`** (outside this repo) — the repo
+contains no credentials and no `.env` file.
 
-## Wymagania
+## Requirements
 
-- **Python 3** z pakietem `notebooklm-py` (ekstras `[browser]`).
-- **Chromium** (pobierany automatycznie przy pierwszym użyciu).
-- Zalogowane **konto Google** (sesja zapisana lokalnie przez `notebooklm login`).
+- **Python 3** with the `notebooklm-py` package (the `[browser]` extra).
+- **Chromium** (downloaded automatically on first use).
+- A signed-in **Google account** (session stored locally by `notebooklm login`).
 
-## Zapis notatek (ask / transcripts)
+## Saving notes (ask / transcripts)
 
-Skille `notebooklm-ask` i `notebooklm-transcripts` zapisują wyniki jako notatki Markdown:
+The `notebooklm-ask` and `notebooklm-transcripts` skills save their output as Markdown notes:
 
-- `notebooklm-ask` → `Concepts/NotebookLM-answers/` (odpowiedź + cytaty jako wikilinki),
-- `notebooklm-transcripts` → `Concepts/NotebookLM-transcripts/` (jedna notatka na źródło).
+- `notebooklm-ask` → `Concepts/NotebookLM-answers/` (answer + citations as wikilinks),
+- `notebooklm-transcripts` → `Concepts/NotebookLM-transcripts/` (one note per source).
 
-Ścieżki są **względne do bieżącego katalogu** — uruchamiaj z katalogu głównego swojego
-vaultu Obsidian, albo podaj `--out` / `--vault`. Skille są przyjazne Obsidianowi
-(frontmatter, wikilinki, callouty), ale działają też na zwykłych plikach `.md`.
+Paths are **relative to the current directory** — run from the root of your Obsidian vault,
+or pass `--out` / `--vault`. The skills are Obsidian-friendly (frontmatter, wikilinks,
+callouts), but they also work on plain `.md` files.
 
-## ⚠️ Bezpieczeństwo
+## ⚠️ Security
 
-- **Nie wysyłaj do NotebookLM treści poufnych/wrażliwych** (hasła, dane osobowe, sekrety).
-  Dodanie źródła wysyła jego treść do usługi Google.
-- W repo nie ma poświadczeń — sesja Google jest trzymana lokalnie przez `notebooklm-py`.
-- Operacje destrukcyjne (`notebook delete`, `source delete`) wymagają jawnego potwierdzenia.
+- **Do not send confidential/sensitive content to NotebookLM** (passwords, personal data,
+  secrets). Adding a source uploads its content to the Google service.
+- The repo holds no credentials — the Google session is kept locally by `notebooklm-py`.
+- Destructive operations (`notebook delete`, `source delete`) require explicit confirmation.
 
-## Testy
+## Tests
 
 ```powershell
 python -m pytest skills/notebooklm-ask/scripts/tests
 ```
 
-## Licencja
+## License
 
 [MIT](LICENSE)
