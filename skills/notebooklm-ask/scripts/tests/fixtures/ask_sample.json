@@ -1,0 +1,24 @@
+{
+  "answer": "Ten notebook podsumowuje najwazniejsze nowosci AI z czerwca 2026 roku, koncentrujac sie na premierze modeli Claude Fable 5 i Mythos 5 oraz aktualizacji Google NotebookLM [1, 2].",
+  "conversation_id": "556aea0d-e819-4f78-b750-6cc02d3b189f",
+  "turn_number": 1,
+  "is_follow_up": true,
+  "references": [
+    {
+      "source_id": "1e427793-0db0-4d3e-98e1-427714a9968d",
+      "citation_number": 1,
+      "cited_text": "Anthropic just released Claude Fable 5 and Claude Mythos 5. Mythos is the new family of Claude models. Fable 5 is the same as Mythos 5 but with additional guardrails.",
+      "start_char": 0,
+      "end_char": 2445,
+      "chunk_id": "429b6c2c-161a-4be2-b9ce-2c22cd8a0104"
+    },
+    {
+      "source_id": "920eee9d-1519-480e-8deb-e3297d7039b5",
+      "citation_number": 2,
+      "cited_text": "Swiatu zostal zaprezentowany nowy model Claude Fable 5, najlepszy model z rodziny Mythos od Anthropic.",
+      "start_char": 0,
+      "end_char": 1000,
+      "chunk_id": "7313bf7f-4181-4227-be5f-72bbe829c6ee"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "notebooklm",
+  "version": "0.1.0",
+  "description": "Obsługa Google NotebookLM z Claude Code: zarządzanie notebookami, dodawanie źródeł, pytania z cytatami i pobieranie transkryptów (backend CLI notebooklm-py).",
+  "author": {
+    "name": "lutencjusz",
+    "url": "https://github.com/lutencjusz"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/lutencjusz/notebooklm-plugin",
+  "repository": "https://github.com/lutencjusz/notebooklm-plugin",
+  "keywords": ["notebooklm", "google-notebooklm", "rag", "research", "transcripts", "obsidian"]
+}

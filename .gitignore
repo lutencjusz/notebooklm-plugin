@@ -1,0 +1,20 @@
+# Sekrety / lokalna konfiguracja — nigdy nie commituj
+.env
+*.key
+*.pem
+
+# Sesja i cache notebooklm-py są trzymane przez CLI poza repo,
+# ale na wszelki wypadek ignoruj lokalne ślady auth
+.notebooklm/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Artefakty narzędzi (np. graphify)
+graphify-out/
+
+# IDE
+.idea/
+.vscode/
