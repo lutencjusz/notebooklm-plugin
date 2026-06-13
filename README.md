@@ -14,6 +14,7 @@ CLI (`python -m notebooklm`).
 | Skill | Purpose |
 |-------|---------|
 | **notebooklm-setup** | Install, Google account login, session verification (`login`, `doctor`, `profile`). Shared dependency of the family. |
+| **notebooklm-refresh-login** | Refresh an expired Google session on a remote/headless server by copying `storage_state.json` from the desktop (no browser on the server). |
 | **notebooklm-notebooks** | Manage notebooks: `list`, `create`, `rename`, `delete`, `use`, `summary`. |
 | **notebooklm-sources** | Add and organize sources (URL, YouTube, PDF/MD, text, research agent). |
 | **notebooklm-ask** | Ask a notebook → `.md` note with citations (script `ask_to_note.py`). |

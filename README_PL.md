@@ -14,6 +14,7 @@ Pod spodem każdy skill woła CLI [`notebooklm-py`](https://github.com/teng-lin/
 | Skill | Zastosowanie |
 |-------|--------------|
 | **notebooklm-setup** | Instalacja, logowanie kontem Google, weryfikacja sesji (`login`, `doctor`, `profile`). Wspólna zależność rodziny. |
+| **notebooklm-refresh-login** | Odświeżenie wygasłej sesji Google na zdalnym/headless serwerze przez przegranie `storage_state.json` z desktopu (serwer nie ma przeglądarki). |
 | **notebooklm-notebooks** | Zarządzanie notebookami: `list`, `create`, `rename`, `delete`, `use`, `summary`. |
 | **notebooklm-sources** | Dodawanie i porządkowanie źródeł (URL, YouTube, PDF/MD, tekst, agent research). |
 | **notebooklm-ask** | Pytanie do notebooka → notatka `.md` z cytatami (skrypt `ask_to_note.py`). |

@@ -8,7 +8,9 @@ description: 'Konfiguruje i weryfikuje dostep do Google NotebookLM przez CLI not
 Weryfikuje srodowisko i sesje Google NotebookLM. CLI to pakiet **notebooklm-py**,
 wywolywany przez `python -m notebooklm`. Pozostale skille rodziny
 (`[[notebooklm-notebooks]]`, `[[notebooklm-sources]]`, `[[notebooklm-ask]]`,
-`[[notebooklm-transcripts]]`) przy bledzie autoryzacji odsylaja tutaj.
+`[[notebooklm-transcripts]]`) przy bledzie autoryzacji odsylaja tutaj. Dla serwerow
+zdalnych/headless (gdzie nie ma przegladarki do logowania) sesje odswieza
+`[[notebooklm-refresh-login]]`.
 
 ## Kiedy uzyc
 

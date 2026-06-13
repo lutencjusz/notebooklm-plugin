@@ -1,6 +1,6 @@
 {
   "name": "notebooklm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Obsługa Google NotebookLM z Claude Code: zarządzanie notebookami, dodawanie źródeł, pytania z cytatami i pobieranie transkryptów (backend CLI notebooklm-py).",
   "author": {
     "name": "lutencjusz",
