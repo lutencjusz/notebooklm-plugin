@@ -118,10 +118,9 @@ def list_sources(nb_id: str) -> list[dict]:
 
 def fetch_fulltext(nb_id: str, src_id: str, fmt: str) -> str | None:
     """Zwraca tekst transkryptu albo None gdy nie udalo sie pobrac."""
-    with tempfile.NamedTemporaryFile(
-        mode="r", suffix=".txt", delete=False, encoding="utf-8"
-    ) as tf:
-        tmp = tf.name
+    # mktemp zwraca sciezke bez tworzenia pliku — CLI musi sam go stworzyc.
+    # NamedTemporaryFile tworzy pusty plik z gory, co na Windows blokuje zapis przez subprocess.
+    tmp = tempfile.mktemp(suffix=".txt")
     try:
         args = ["source", "fulltext", src_id, "-n", nb_id, "-o", tmp]
         if fmt == "markdown":
@@ -205,9 +204,12 @@ def main():
     ap.add_argument("notebook", nargs="?", help="Fragment ID lub tytulu notebooka")
     ap.add_argument("--out", default=os.path.join("Concepts", "NotebookLM-transcripts"),
                     help="Katalog docelowy (wzgledem --vault)")
-    # Domyslnie vault = biezacy katalog: uruchamiaj skrypt z korzenia swojego
-    # vaultu Obsidian, albo wskaz sciezke jawnie przez --vault.
-    ap.add_argument("--vault", default=os.getcwd(), help="Sciezka bazowa vaultu")
+    # Domyslny vault liczony od polozenia skryptu (.../<vault>/AI/skills/
+    # notebooklm-transcripts/scripts/fetch_transcripts.py), nie od cwd —
+    # cwd procesu bywa rozny i nie jest wiarygodny.
+    default_vault = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
+    ap.add_argument("--vault", default=default_vault, help="Sciezka bazowa vaultu")
     ap.add_argument("--format", choices=["markdown", "text"], default="markdown")
     ap.add_argument("--source", action="append", default=[],
                     help="Pobierz tylko zrodla o tym prefiksie ID (mozna podac wiele razy)")
