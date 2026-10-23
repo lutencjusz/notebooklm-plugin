@@ -43,6 +43,14 @@ weryfikację → `scp` świeżego pliku na serwer, tuż przed cronem.
 > zalogowany miesiącami). Zależność: `pip install rookiepy` (na Pythonie 3.14 build
 > wymaga `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1` — PyO3 0.20 wspiera ≤3.12).
 
+> [!ostrzeżenie] Wersje `notebooklm-py` / `rookiepy` — tylko za zgodą użytkownika
+> Na tym komputerze `notebooklm-py` jest przypięty do **0.8.1** — ostatniej wersji, w której
+> `--browser-cookies` używa `rookiepy`. Od 0.8.2 biblioteka wymaga pakietu `rookie-cookies`, którego
+> moduł `.pyd` antywirus F-Secure wrzucił do kwarantanny (2026-10-23). **Nie podbijaj `notebooklm-py`
+> ani `rookiepy` i nie instaluj `rookie-cookies` bez zgody użytkownika.** Komunikat
+> `rookie-cookies is not installed` = ktoś podbił wersję; przywrócenie:
+> `pip install --user "notebooklm-py==0.8.1"`.
+
 ```powershell
 # 1. ekstrakcja z Firefoksa do pliku tymczasowego (nieinteraktywna)
 python -m notebooklm login --browser-cookies firefox --storage <tmp>

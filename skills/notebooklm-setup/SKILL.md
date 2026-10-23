@@ -35,6 +35,12 @@ uv tool install "notebooklm-py[browser]"
 (alternatywa: `pipx install "notebooklm-py[browser]"`). Pierwsze uzycie pobiera
 Chromium (~170 MB).
 
+> **Uwaga (ten komputer, od 2026-10-23):** lokalny `notebooklm-py` jest przypiety do **0.8.1** -
+> ostatniej wersji, w ktorej `--browser-cookies` uzywa `rookiepy`. Od 0.8.2 wymaga pakietu
+> `rookie-cookies`, ktorego modul `.pyd` antywirus F-Secure wrzucil do kwarantanny. Nie podbijaj
+> `notebooklm-py` ani `rookiepy` i nie instaluj `rookie-cookies` (takze przez extra `[cookies]`)
+> bez zgody uzytkownika. Przywrocenie: `pip install --user "notebooklm-py==0.8.1"`.
+
 **2. Sprawdz autoryzacje:**
 
 ```powershell
